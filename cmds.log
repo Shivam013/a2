@@ -1,0 +1,11 @@
+   1  cp /home/test/A1/downloaded_tweets_extend_nolf2.tsv /home/shivam/A2
+   2  cp /home/test/A1/downloaded_tweets_extend_original_nolf2.tsv /home/shivam/A2
+   3  grep -h 'type=replied_to' downloaded_tweets_extend_original_nolf2.tsv > original_replies
+   4  awk -F "\t" '{ if($2 != $6) print $2}' original_replies | sort | uniq -c | sort -nr | head -n 10
+   5  awk -F "\t" '{ if($2 != $6) print $6}' original_replies | sort | uniq -c | sort -nr | head -n 10
+   6  grep -h 'type=retweeted' downloaded_tweets_extend_nolf2.tsv | awk -F "\t" '{ if($2 != $6) print $2}' | sort | uniq -c | sort -nr | head -n 10
+   7  awk -F "\t" '{print $4}' downloaded_tweets_extend_nolf2.tsv | tr ',' '\n' | tr -d '\"' | tr '[:upper:]' '[:lower:]' | sed '/^$/d'| sort | uniq -c | sort -nr | head -n 30
+   8  grep -h 'type=retweeted' downloaded_tweets_extend_nolf2.tsv | awk -F "\t" '{print $4}' | tr '[:upper:]' '[:lower:]' | tr ',' '\n' | tr -d '\"' | sed '/^$/d'| sort | uniq -c | sort -nr | head -n 30
+   9  grep -h 'type=replied_to' downloaded_tweets_extend_nolf2.tsv | awk -F "\t" '{print $4}' | tr '[:upper:]' '[:lower:]' | tr ',' '\n' | tr -d '\"' | sed '/^$/d'| sort | uniq -c | sort -nr | head -n 30
+  10  grep -h 'type=quoted' downloaded_tweets_extend_nolf2.tsv | awk -F "\t" '{print $4}' | tr '[:upper:]' '[:lower:]' | tr ',' '\n' | tr -d '\"' | sed '/^$/d'| sort | uniq -c | sort -nr | head -n 30
+  11  history > cmds.log
